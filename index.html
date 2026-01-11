@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAQ – Apache2 (Apple Look)</title>
+  <meta name="description" content="VoltLog" />
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --panel: #f5f5f7;
+      --panel2:#ffffff;
+      --text:#1d1d1f;
+      --muted:#6e6e73;
+      --line: rgba(0,0,0,.08);
+      --shadow: 0 14px 40px rgba(0,0,0,.08);
+      --shadow2: 0 10px 24px rgba(0,0,0,.08);
+      --radius: 18px;
+      --radius2: 14px;
+      --max: 1100px;
+      --blur: saturate(180%) blur(14px);
+      --focus: 0 0 0 4px rgba(0, 122, 255, .18);
+      --blue:#007aff;
+      --green:#34c759;
+    }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0d;
+        --panel:#16161a;
+        --panel2:#101013;
+        --text:#f5f5f7;
+        --muted:#a1a1a6;
+        --line: rgba(255,255,255,.10);
+        --shadow: 0 18px 60px rgba(0,0,0,.55);
+        --shadow2: 0 14px 40px rgba(0,0,0,.55);
+        --focus: 0 0 0 4px rgba(10, 132, 255, .22);
+        --blue:#0a84ff;
+      }
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(0,122,255,.10), transparent 55%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(52,199,89,.10), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 24px 18px 72px; }
+
+    /* Topbar */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 220px;
+    }
+    .logo{
+      width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), color-mix(in srgb, var(--blue) 40%, var(--green)));
+      box-shadow: var(--shadow2);
+    }
+    .brand h1{
+      font-size: 14px;
+      margin:0;
+      letter-spacing: .2px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .brand small{
+      display:block;
+      margin-top:2px;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .controls{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap: 10px;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .search{
+      flex: 1;
+      position: relative;
+      min-width: 220px;
+      max-width: 520px;
+    }
+    .search input{
+      width:100%;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 78%, transparent);
+      color: var(--text);
+      padding: 10px 40px 10px 38px;
+      border-radius: 999px;
+      outline:none;
+      transition: box-shadow .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .search input:focus{
+      border-color: color-mix(in srgb, var(--blue) 55%, var(--line));
+      box-shadow: var(--focus);
+      transform: translateY(-1px);
+    }
+    .search .icon{
+      position:absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .75;
+      pointer-events:none;
+      font-size: 14px;
+    }
+    .search button{
+      position:absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor:pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .search button:hover{ background: color-mix(in srgb, var(--panel) 60%, transparent); }
+
+    .pill{
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 78%, transparent);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight: 600;
+      font-size: 12px;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      white-space: nowrap;
+    }
+    .pill:hover{ transform: translateY(-1px); box-shadow: var(--shadow2); }
+    .pill:focus{ outline: none; box-shadow: var(--focus); }
+    .pill .dot{ width: 8px; height: 8px; border-radius: 50%; background: var(--blue); opacity: .9; }
+
+    /* Hero */
+    .hero{
+      padding: 24px 0 14px;
+    }
+    .hero h2{
+      font-size: clamp(28px, 4vw, 44px);
+      margin: 16px 0 10px;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+    }
+    .hero p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+    .meta-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .chip strong{ color: var(--text); font-weight: 700; }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 300px 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    @media (max-width: 960px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Sidebar */
+    .sidebar{
+      position: sticky;
+      top: 72px;
+      align-self: start;
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow2);
+    }
+    @media (max-width: 960px){
+      .sidebar{ position: static; }
+    }
+    .sidebar h3{
+      margin: 6px 6px 10px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .2px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .nav{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 6px;
+    }
+    .nav a{
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: var(--text);
+      font-weight: 650;
+      font-size: 13px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+    .nav a:hover{
+      background: color-mix(in srgb, var(--panel) 70%, transparent);
+      border-color: var(--line);
+      transform: translateY(-1px);
+    }
+    .nav a.active{
+      background: color-mix(in srgb, var(--blue) 12%, var(--panel2));
+      border-color: color-mix(in srgb, var(--blue) 30%, var(--line));
+    }
+    .count{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+      flex: 0 0 auto;
+    }
+
+    /* Content */
+    .content{
+      min-width: 0;
+    }
+
+    .section{
+      margin-bottom: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+      box-shadow: var(--shadow2);
+      overflow: hidden;
+    }
+    .section-head{
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 84%, transparent);
+    }
+    .section-head h3{
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .section-head p{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .subsection{
+      padding: 16px 18px 6px;
+    }
+    .subsection h4{
+      margin: 4px 0 12px;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .25px;
+      font-weight: 800;
+    }
+
+    .cards{
+      display:grid;
+      gap: 10px;
+      padding-bottom: 12px;
+    }
+
+    /* FAQ Card / Accordion */
+    .card{
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel) 75%, transparent);
+      border-radius: var(--radius2);
+      overflow: hidden;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow2);
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+    }
+
+    details{
+      border-radius: var(--radius2);
+    }
+    summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 14px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      user-select: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    .caret{
+      width: 26px; height: 26px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      display:grid;
+      place-items:center;
+      color: var(--muted);
+      flex: 0 0 auto;
+      margin-top: 1px;
+      background: color-mix(in srgb, var(--panel2) 72%, transparent);
+      transition: transform .18s ease, color .18s ease, background .18s ease;
+    }
+    details[open] .caret{
+      transform: rotate(90deg);
+      color: var(--text);
+      background: color-mix(in srgb, var(--blue) 10%, var(--panel2));
+    }
+
+    .title-wrap{ min-width:0; flex: 1; }
+    .q-title{
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.15px;
+      line-height: 1.25;
+    }
+    .q-sub{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+      max-width: 90ch;
+    }
+
+    .tag{
+      align-self: center;
+      flex: 0 0 auto;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 70%, transparent);
+      display:flex;
+      align-items:center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+    .tag .play{
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue);
+      display:inline-block;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent);
+    }
+
+    .answer{
+      padding: 0 14px 14px;
+      display:grid;
+      gap: 12px;
+    }
+
+    .answer p{
+      margin: 0;
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .video{
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      overflow:hidden;
+      background: #000;
+      box-shadow: var(--shadow2);
+    }
+    .video video, .video iframe{
+      width:100%;
+      display:block;
+      aspect-ratio: 16 / 9;
+      border: 0;
+    }
+
+    .btnrow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn{
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--panel2) 78%, transparent);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 700;
+      font-size: 13px;
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow2); }
+    .btn:focus{ outline: none; box-shadow: var(--focus); }
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--blue) 45%, var(--line));
+      background: color-mix(in srgb, var(--blue) 12%, var(--panel2));
+    }
+    .btn .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--panel2) 72%, transparent);
+    }
+
+    /* Empty state */
+    .empty{
+      padding: 30px 18px;
+      color: var(--muted);
+      text-align:center;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--panel2) 65%, transparent);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar" aria-label="Topbar">
+    <div class="topbar-inner">
+      <div class="brand" aria-label="Brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Apache2 FAQ</h1>
+          <small>Apple-Look • Kategorien • Video + Text</small>
+        </div>
+      </div>
+
+      <div class="controls" aria-label="Controls">
+        <div class="search" role="search">
+          <span class="icon" aria-hidden="true">⌕</span>
+          <input id="search" type="search" placeholder="Suchen… Titel, Text, Kategorie (⌘/Strg + K)" autocomplete="off" />
+          <button id="clearBtn" type="button" aria-label="Suche löschen" title="Suche löschen">✕</button>
+        </div>
+
+        <button class="pill" id="expandAll" type="button" title="Alle öffnen">
+          <span class="dot" aria-hidden="true"></span>
+          Alle öffnen
+        </button>
+        <button class="pill" id="collapseAll" type="button" title="Alle schließen">
+          <span class="dot" aria-hidden="true" style="opacity:.35"></span>
+          Alle schließen
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-label="Hero">
+      <h2>Moderne FAQ für deinen Apache2-Server</h2>
+      <p>
+        Alles kommt aus einer <span class="mono">List of Maps</span>: Kategorien → Subtitel → Einträge (jeweils Titel, Text und Video).
+        Ideal als statische Seite auf Apache2 – einfach <span class="mono">index.html</span> hochladen.
+      </p>
+
+      <div class="meta-row" aria-label="Meta">
+        <div class="chip">Einträge: <strong id="totalCount">0</strong></div>
+        <div class="chip">Kategorien: <strong id="catCount">0</strong></div>
+        <div class="chip">Filter: <strong id="filterState">—</strong></div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Layout">
+      <aside class="sidebar" aria-label="Navigation">
+        <h3>Kategorien</h3>
+        <nav class="nav" id="nav"></nav>
+      </aside>
+
+      <section class="content" aria-label="FAQ Inhalte">
+        <div id="content"></div>
+        <div id="empty" class="empty" hidden>
+          Keine Treffer. Tipp: Suche nach <span class="mono">SSL</span>, <span class="mono">vhost</span>, <span class="mono">rewrite</span> …
+        </div>
+
+        <footer>
+          <div>© <span id="year"></span> • Apache2 FAQ</div>
+          <div>Shortcut: <span class="mono">Ctrl/⌘ + K</span> (Suche fokussieren)</div>
+        </footer>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    /**
+     * ✅ LIST OF MAPS (Datenquelle)
+     * - Kategorien → subtitle-Gruppen → items
+     * - Jeder item: title, text, video
+     *
+     * Du kannst das hier 1:1 durch dein JSON ersetzen (aus Datei, PHP, API …).
+     */
+    const FAQ_DATA = [
+      {
+        category: "Mobile App",
+        description: "Alles rund um die Mobile App",
+        subtitle: "Installation & Setup",
+        items: [
+                    {
+            title: "Anmeldung / Registrierung",
+            text: "In diesem Video wird gezeigt, wie du dich bei VoltLog registrierst und anmeldest. Du erfährst, welche Angaben benötigt werden und wie du dein Benutzerkonto schnell und sicher einrichtest.",
+            video: "m0.mp4"
+          },
+          {
+            title: "VoltLog Prinzip Smartphone",
+            text: "Hier erklären wir das Grundprinzip von VoltLog auf dem Smartphone. Du lernst, wie Messungen, Dokumentation und Auswertung direkt mobil durchgeführt werden können.",
+            video: "m1.mp4"
+          },
+          {
+            title: "Stromkreis Hinzufügen",
+            text: "In diesem Video siehst du, wie ein neuer Stromkreis angelegt wird. Schritt für Schritt wird erklärt, wie die notwendigen Daten erfasst und gespeichert werden.",
+            video: "m2.mp4"
+          },
+          {
+            title: "Messwerte Ausfüllen",
+            text: "Dieses Video zeigt, wie Messwerte korrekt eingetragen werden. Du erfährst, welche Werte erforderlich sind und wie VoltLog dich bei der Eingabe unterstützt.",
+            video: "m3.mp4"
+          },
+          {
+            title: "Übersicht Stromkreise",
+            text: "Hier erhältst du eine Übersicht aller angelegten Stromkreise. Das Video zeigt, wie du Stromkreise schnell findest, prüfst und bearbeitest.",
+            video: "m4.mp4"
+          },
+                    {
+            title: "App für Kontrolle vorberieten",
+            text: "In diesem Video wird erklärt, wie du die App für eine Kontrolle vorbereitest und die Mängelliste herunterlädst, um offline oder vor Ort effizient arbeiten zu können.",
+            video: "m5.mp4"
+          },
+                    {
+            title: "Mängel erfassenn",
+            text: "Hier lernst du, wie Mängel direkt in der App erfasst werden. Das Video zeigt das Anlegen, Beschreiben und Dokumentieren von Mängeln inklusive Fotos und Kommentaren.",
+            video: "m6.mp4"
+          },
+                    {
+            title: "Protokoll erfassenn",
+            text: "Dieses Video erklärt, wie Prüf- und Messprotokolle erstellt werden. Alle relevanten Daten werden strukturiert erfasst und automatisch im Projekt gespeichert.",
+            video: "m7.mp4"
+          },
+                    {
+            title: "Übersicht Bericht",
+            text: "In diesem Video siehst du, wie Berichte aufgebaut sind und überprüft werden können. Du erhältst einen Überblick über Inhalte, Status und Exportmöglichkeiten.",
+            video: "m8.mp4"
+          },
+                    {
+            title: "Übersicht Projekt",
+            text: "Hier wird die Projektübersicht erklärt. Du erkennst auf einen Blick den Fortschritt, offene Punkte und den aktuellen Stand deines Projekts.",
+            video: "m9.mp4"
+          },
+                    {
+            title: "Übersicht Einstellungen",
+            text: "Dieses Video zeigt die Einstellungen der App. Du lernst, wie Benutzeroptionen, Projekteinstellungen und allgemeine Konfigurationen angepasst werden.",
+            video: "m10.mp4"
+          },
+                    {
+            title: "AI Funktion",
+            text: "In diesem Video wird die AI-Funktion vorgestellt. Sie unterstützt dich bei der Analyse, Texterstellung und Auswertung von Daten, um Zeit zu sparen und Fehler zu reduzieren.",
+            video: "m11.mp4"
+          }
+        ]
+      },
+      {
+        category: "Web App",
+        description: "Alles rund um die Web App",
+        subtitle: "VHosts & DocumentRoot",
+        items: [
+          {
+            title: "Messwerte Übersicht",
+            text: "",
+            video: "w1.mp4"
+          },
+          {
+            title: "Kontrolle Übersicht",
+            text: "",
+            video: "w2.mp4"
+          },
+                    {
+            title: "Gruppen Übersicht",
+            text: "",
+            video: "w3.mp4"
+          },
+          {
+            title: "Nutzer Übersicht",
+            text: "",
+            video: "w4.mp4"
+          },
+          {
+            title: "Mängelliste erstellen",
+            text: "",
+            video: "w5.mp4"
+          },
+        ]
+      },
+      {
+        category: "Export Dokumente",
+        description: "TLS, Headers und Best Practices.",
+        subtitle: "SSL & HTTPS",
+        items: [
+          {
+            title: "Export Dokumente",
+            text: "",
+            video: "w6.mp4"
+          },
+        ]
+      },
+      {
+        category: "VoltLog Funktion",
+        description: "Caching, Kompression und Module.",
+        subtitle: "Caching & Kompression",
+        items: [
+          {
+            title: "Gzip/Brotli Kompression aktivieren",
+            text: "Aktiviere mod_deflate oder mod_brotli. Komprimiere Textressourcen (HTML/CSS/JS) und teste die Response-Header. Nicht alles komprimieren (z. B. Videos).",
+            video: "/videos/apache-compression.mp4"
+          },
+          {
+            title: "Caching mit mod_expires",
+            text: "Setze Expires und Cache-Control für statische Assets. Versioniere Assets (z. B. app.v123.js) für aggressives Caching ohne Probleme.",
+            video: "/videos/apache-caching.mp4"
+          }
+        ]
+      }
+    ];
+
+    // ---------- Helpers ----------
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    const state = {
+      activeCategory: null, // string|null
+      query: ""
+    };
+
+    // Flatten counts
+    function countAll(data){
+      let cats = new Set();
+      let items = 0;
+      for(const group of data){
+        cats.add(group.category);
+        items += (group.items?.length ?? 0);
+      }
+      return { items, categories: cats.size };
+    }
+
+    // Group by category → subtitle
+    function normalize(data){
+      // data is already "List of Maps" but could repeat categories/subtitles
+      const map = new Map();
+
+      for(const block of data){
+        const cat = block.category?.trim() || "Ohne Kategorie";
+        const desc = block.description?.trim() || "";
+        const subtitle = block.subtitle?.trim() || "Allgemein";
+        const items = Array.isArray(block.items) ? block.items : [];
+
+        if(!map.has(cat)){
+          map.set(cat, { category: cat, description: desc, subtitles: new Map() });
+        }
+        const catObj = map.get(cat);
+        if(!catObj.description && desc) catObj.description = desc;
+
+        if(!catObj.subtitles.has(subtitle)){
+          catObj.subtitles.set(subtitle, []);
+        }
+        for(const item of items){
+          catObj.subtitles.get(subtitle).push({
+            title: (item.title || "").trim(),
+            text: (item.text || "").trim(),
+            video: (item.video || "").trim()
+          });
+        }
+      }
+
+      return Array.from(map.values()).map(c => ({
+        category: c.category,
+        description: c.description,
+        subtitles: Array.from(c.subtitles.entries()).map(([subtitle, items]) => ({ subtitle, items }))
+      }));
+    }
+
+    function matches(item, cat, subtitle, q){
+      if(!q) return true;
+      const hay = `${cat} ${subtitle} ${item.title} ${item.text}`.toLowerCase();
+      return hay.includes(q.toLowerCase());
+    }
+
+    function isYouTube(url){
+      if(!url) return false;
+      const u = url.toLowerCase();
+      return u.includes("youtube.com") || u.includes("youtu.be");
+    }
+
+    function toYouTubeEmbed(url){
+      try{
+        const u = new URL(url, window.location.href);
+        if(u.hostname.includes("youtu.be")){
+          const id = u.pathname.replace("/", "");
+          return `https://www.youtube.com/embed/${id}`;
+        }
+        if(u.hostname.includes("youtube.com")){
+          const id = u.searchParams.get("v");
+          if(id) return `https://www.youtube.com/embed/${id}`;
+          // already embed?
+          if(u.pathname.includes("/embed/")) return url;
+        }
+      }catch(e){}
+      return url;
+    }
+
+    // ---------- Render ----------
+    const data = normalize(FAQ_DATA);
+
+    function renderNav(){
+      const nav = $("#nav");
+      nav.innerHTML = "";
+
+      // Count items per category (respecting search query)
+      const counts = new Map();
+      for(const catObj of data){
+        let n = 0;
+        for(const s of catObj.subtitles){
+          for(const item of s.items){
+            if(matches(item, catObj.category, s.subtitle, state.query)) n++;
+          }
+        }
+        counts.set(catObj.category, n);
+      }
+
+      // "Alle"
+      const total = Array.from(counts.values()).reduce((a,b)=>a+b,0);
+      nav.appendChild(navLink("Alle Kategorien", null, total));
+
+      // Category links
+      for(const catObj of data){
+        nav.appendChild(navLink(catObj.category, catObj.category, counts.get(catObj.category) || 0));
+      }
+
+      function navLink(label, catValue, count){
+        const a = document.createElement("a");
+        a.href = "#";
+        a.dataset.cat = catValue ?? "";
+        a.className = (state.activeCategory === catValue) ? "active" : "";
+        a.innerHTML = `<span>${escapeHtml(label)}</span><span class="count">${count}</span>`;
+        a.addEventListener("click", (e)=>{
+          e.preventDefault();
+          state.activeCategory = catValue;
+          updateFilterLabel();
+          renderAll();
+          // scroll content a bit on mobile for nicer UX
+          if(window.matchMedia("(max-width: 960px)").matches){
+            $("#content").scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+        return a;
+      }
+    }
+
+    function renderContent(){
+      const root = $("#content");
+      root.innerHTML = "";
+
+      let visibleItems = 0;
+
+      const toShow = state.activeCategory
+        ? data.filter(c => c.category === state.activeCategory)
+        : data;
+
+      for(const catObj of toShow){
+        // Build section only if it has at least 1 matching item
+        const sectionEl = document.createElement("section");
+        sectionEl.className = "section";
+
+        const head = document.createElement("div");
+        head.className = "section-head";
+        head.innerHTML = `
+          <h3>${escapeHtml(catObj.category)}</h3>
+          <p>${escapeHtml(catObj.description || "—")}</p>
+        `;
+        sectionEl.appendChild(head);
+
+        let hasAny = false;
+
+        for(const sub of catObj.subtitles){
+          // filter items by query
+          const items = sub.items.filter(it => matches(it, catObj.category, sub.subtitle, state.query));
+          if(items.length === 0) continue;
+
+          hasAny = true;
+
+          const subEl = document.createElement("div");
+          subEl.className = "subsection";
+          subEl.innerHTML = `<h4>${escapeHtml(sub.subtitle)}</h4>`;
+
+          const cards = document.createElement("div");
+          cards.className = "cards";
+
+          for(const item of items){
+            cards.appendChild(renderCard(item, catObj.category, sub.subtitle));
+            visibleItems++;
+          }
+
+          subEl.appendChild(cards);
+          sectionEl.appendChild(subEl);
+        }
+
+        if(hasAny) root.appendChild(sectionEl);
+      }
+
+      $("#empty").hidden = visibleItems !== 0;
+      $("#totalCount").textContent = visibleItems;
+    }
+
+    function renderCard(item, category, subtitle){
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const hasVideo = !!item.video;
+      const videoLabel = hasVideo ? "Video" : "Ohne Video";
+
+      const safeTitle = escapeHtml(item.title || "Ohne Titel");
+      const safeText = escapeHtml(item.text || "");
+      const safeCat = escapeHtml(category);
+      const safeSub = escapeHtml(subtitle);
+
+      // Details accordion
+      const details = document.createElement("details");
+      details.innerHTML = `
+        <summary>
+          <div class="caret" aria-hidden="true">›</div>
+          <div class="title-wrap">
+            <p class="q-title">${safeTitle}</p>
+            <p class="q-sub">${safeSub} • ${safeCat}</p>
+          </div>
+          <div class="tag" title="${videoLabel}">
+            <span class="play" aria-hidden="true"></span>
+            ${escapeHtml(videoLabel)}
+          </div>
+        </summary>
+        <div class="answer">
+          <p>${safeText}</p>
+          ${hasVideo ? renderVideoHtml(item.video) : ""}
+          <div class="btnrow">
+            <button class="btn primary" type="button" data-copy="${encodeURIComponent(item.title || "")}">
+              Kopiere Titel <span class="kbd">⌘C</span>
+            </button>
+            <button class="btn" type="button" data-link="${encodeURIComponent(makePermalink(category, subtitle, item.title))}">
+              Permalink
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Button actions
+      details.addEventListener("click", async (e)=>{
+        const t = e.target;
+        if(!(t instanceof HTMLElement)) return;
+
+        const copy = t.closest("[data-copy]");
+        if(copy){
+          const text = decodeURIComponent(copy.getAttribute("data-copy") || "");
+          await copyToClipboard(text);
+          toast(`Kopiert: "${text}"`);
+          e.preventDefault();
+          return;
+        }
+
+        const link = t.closest("[data-link]");
+        if(link){
+          const href = decodeURIComponent(link.getAttribute("data-link") || "#");
+          history.replaceState(null, "", href);
+          toast("Permalink aktualisiert");
+          e.preventDefault();
+          return;
+        }
+      });
+
+      card.appendChild(details);
+      return card;
+    }
+
+    function renderVideoHtml(videoUrl){
+      // Supports:
+      // - mp4 path: /videos/foo.mp4
+      // - YouTube link: https://youtube.com/watch?v=...
+      // - YouTube embed link
+      // Lazy-ish: use loading=lazy on iframe; video is native.
+      const url = videoUrl.trim();
+      if(isYouTube(url)){
+        const embed = toYouTubeEmbed(url);
+        return `
+          <div class="video" aria-label="Video">
+            <iframe
+              src="${escapeAttr(embed)}"
+              title="YouTube video player"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        `;
+      }
+
+      // default: mp4 or other video file
+      return `
+        <div class="video" aria-label="Video">
+          <video controls preload="metadata">
+            <source src="${escapeAttr(url)}" type="video/mp4" />
+            Dein Browser unterstützt das Video-Tag nicht.
+          </video>
+        </div>
+      `;
+    }
+
+    function renderAll(){
+      renderNav();
+      renderContent();
+      highlightActiveNav();
+    }
+
+    function highlightActiveNav(){
+      $$("#nav a").forEach(a => a.classList.remove("active"));
+      const sel = state.activeCategory ? `[data-cat="${cssEscape(state.activeCategory)}"]` : `[data-cat=""]`;
+      const active = $(`#nav a${sel}`);
+      if(active) active.classList.add("active");
+    }
+
+    function updateFilterLabel(){
+      const q = state.query?.trim();
+      const cat = state.activeCategory;
+      let label = "—";
+      if(cat && q) label = `"${q}" in ${cat}`;
+      else if(cat) label = cat;
+      else if(q) label = `"${q}"`;
+      $("#filterState").textContent = label;
+    }
+
+    // ---------- Search + keyboard ----------
+    const searchInput = $("#search");
+    const clearBtn = $("#clearBtn");
+
+    searchInput.addEventListener("input", () => {
+      state.query = searchInput.value || "";
+      updateFilterLabel();
+      renderAll();
+    });
+
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      state.query = "";
+      updateFilterLabel();
+      renderAll();
+      searchInput.focus();
+    });
+
+    window.addEventListener("keydown", (e)=>{
+      const isMac = navigator.platform.toLowerCase().includes("mac");
+      const meta = isMac ? e.metaKey : e.ctrlKey;
+
+      // Ctrl/⌘ + K focuses search
+      if(meta && e.key.toLowerCase() === "k"){
+        e.preventDefault();
+        searchInput.focus();
+      }
+      // Escape clears
+      if(e.key === "Escape"){
+        if(document.activeElement === searchInput && searchInput.value){
+          clearBtn.click();
+        }
+      }
+    });
+
+    // Expand/collapse all visible
+    $("#expandAll").addEventListener("click", ()=>{
+      $$("#content details").forEach(d => d.open = true);
+    });
+    $("#collapseAll").addEventListener("click", ()=>{
+      $$("#content details").forEach(d => d.open = false);
+    });
+
+    // ---------- Permalinks ----------
+    function makePermalink(category, subtitle, title){
+      const params = new URLSearchParams();
+      if(category) params.set("cat", category);
+      if(subtitle) params.set("sub", subtitle);
+      if(title) params.set("q", title);
+      return `${location.pathname}?${params.toString()}`;
+    }
+
+    function applyPermalink(){
+      const params = new URLSearchParams(location.search);
+      const cat = params.get("cat");
+      const q = params.get("q");
+
+      if(cat) state.activeCategory = cat;
+      if(q){
+        state.query = q;
+        searchInput.value = q;
+      }
+    }
+
+    // ---------- Toast ----------
+    function toast(msg){
+      // simple, lightweight toast
+      let el = $("#toast");
+      if(!el){
+        el = document.createElement("div");
+        el.id = "toast";
+        el.style.position = "fixed";
+        el.style.left = "50%";
+        el.style.bottom = "22px";
+        el.style.transform = "translateX(-50%)";
+        el.style.padding = "10px 14px";
+        el.style.borderRadius = "999px";
+        el.style.border = "1px solid var(--line)";
+        el.style.background = "color-mix(in srgb, var(--panel2) 80%, transparent)";
+        el.style.backdropFilter = "var(--blur)";
+        el.style.webkitBackdropFilter = "var(--blur)";
+        el.style.boxShadow = "var(--shadow2)";
+        el.style.color = "var(--text)";
+        el.style.fontWeight = "700";
+        el.style.fontSize = "13px";
+        el.style.zIndex = "999";
+        el.style.opacity = "0";
+        el.style.transition = "opacity .15s ease, transform .15s ease";
+        document.body.appendChild(el);
+      }
+      el.textContent = msg;
+      el.style.opacity = "1";
+      el.style.transform = "translateX(-50%) translateY(-2px)";
+      clearTimeout(el._t);
+      el._t = setTimeout(()=>{
+        el.style.opacity = "0";
+        el.style.transform = "translateX(-50%) translateY(0px)";
+      }, 1600);
+    }
+
+    // ---------- Clipboard ----------
+    async function copyToClipboard(text){
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+    }
+
+    // ---------- Escaping ----------
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, (c)=>({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+    function escapeAttr(str){
+      return escapeHtml(str).replace(/`/g, "&#96;");
+    }
+    function cssEscape(str){
+      // minimal CSS escape for attribute selector usage
+      return String(str).replace(/["\\]/g, "\\$&");
+    }
+
+    // ---------- Init ----------
+    (function init(){
+      $("#year").textContent = new Date().getFullYear();
+
+      const counts = countAll(FAQ_DATA);
+      $("#catCount").textContent = counts.categories;
+
+      applyPermalink();
+      updateFilterLabel();
+      renderAll();
+
+      // If permalink query is a specific title, auto-open first matching item
+      if(state.query){
+        const first = $("#content details");
+        if(first) first.open = true;
+      }
+    })();
+  </script>
+
+  <!--
+    ✅ Apache2 Deployment (kurz):
+    1) Datei als "index.html" speichern
+    2) Auf deinen Apache DocumentRoot kopieren, z.B. /var/www/html/
+    3) Videos in /var/www/html/videos/ ablegen (Pfad passt zu /videos/...)
+    4) Aufrufen: http://dein-server/
+  -->
+</body>
+</html>
