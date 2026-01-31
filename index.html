@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FAQ – Apache2 (Apple Look)</title>
-  <meta name="description" content="VoltLog" />
+  <title>FAQ – VoltLog</title>
+  <meta name="description" content="VoltLog – FAQ zur VoltLog Software (Mobile App & Web App)." />
 
   <style>
     :root{
@@ -509,8 +509,8 @@
       <div class="brand" aria-label="Brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
-          <h1>Apache2 FAQ</h1>
-          <small>Apple-Look • Kategorien • Video + Text</small>
+          <h1>VoltLog FAQ</h1>
+          <small>Mobile App • Web App • Exporte • Hilfe</small>
         </div>
       </div>
 
@@ -535,10 +535,9 @@
 
   <main class="wrap">
     <section class="hero" aria-label="Hero">
-      <h2>Moderne FAQ für deinen Apache2-Server</h2>
+      <h2>Hilfe & FAQ zu VoltLog</h2>
       <p>
-        Alles kommt aus einer <span class="mono">List of Maps</span>: Kategorien → Subtitel → Einträge (jeweils Titel, Text und Video).
-        Ideal als statische Seite auf Apache2 – einfach <span class="mono">index.html</span> hochladen.
+        Hier findest du kurze Antworten und Video‑Anleitungen zur VoltLog Software – von der Anmeldung über Messwerte bis zu Exporten und Berichten.
       </p>
 
       <div class="meta-row" aria-label="Meta">
@@ -557,11 +556,11 @@
       <section class="content" aria-label="FAQ Inhalte">
         <div id="content"></div>
         <div id="empty" class="empty" hidden>
-          Keine Treffer. Tipp: Suche nach <span class="mono">SSL</span>, <span class="mono">vhost</span>, <span class="mono">rewrite</span> …
+          Keine Treffer. Tipp: Suche nach <span class="mono">Projekt</span>, <span class="mono">Stromkreis</span>, <span class="mono">Messwerte</span>, <span class="mono">Export</span> …
         </div>
 
         <footer>
-          <div>© <span id="year"></span> • Apache2 FAQ</div>
+          <div>© <span id="year"></span> • VoltLog</div>
           <div>Shortcut: <span class="mono">Ctrl/⌘ + K</span> (Suche fokussieren)</div>
         </footer>
       </section>
@@ -579,129 +578,175 @@
     const FAQ_DATA = [
       {
         category: "Mobile App",
-        description: "Alles rund um die Mobile App",
-        subtitle: "Installation & Setup",
+        description: "Arbeiten unterwegs: Projekte, Stromkreise, Messwerte, Kontrollen und Berichte – direkt auf dem Smartphone.",
+        subtitle: "Erste Schritte",
         items: [
-                    {
-            title: "Anmeldung / Registrierung",
-            text: "In diesem Video wird gezeigt, wie du dich bei VoltLog registrierst und anmeldest. Du erfährst, welche Angaben benötigt werden und wie du dein Benutzerkonto schnell und sicher einrichtest.",
+          {
+            title: "Anmeldung & Registrierung",
+            text: "So erstellst du dein VoltLog-Konto oder meldest dich an. Du siehst, welche Angaben nötig sind und wie du sicher startest.",
             video: "m0.mp4"
           },
           {
-            title: "VoltLog Prinzip Smartphone",
-            text: "Hier erklären wir das Grundprinzip von VoltLog auf dem Smartphone. Du lernst, wie Messungen, Dokumentation und Auswertung direkt mobil durchgeführt werden können.",
+            title: "VoltLog – Grundprinzip (Smartphone)",
+            text: "Ein kurzer Überblick über die mobile Arbeitsweise: Projekte öffnen, Daten erfassen, Ergebnisse prüfen und alles sauber dokumentieren.",
             video: "m1.mp4"
-          },
+          }
+        ]
+      },
+      {
+        category: "Mobile App",
+        description: "Arbeiten unterwegs: Projekte, Stromkreise, Messwerte, Kontrollen und Berichte – direkt auf dem Smartphone.",
+        subtitle: "Stromkreise & Messwerte",
+        items: [
           {
-            title: "Stromkreis Hinzufügen",
-            text: "In diesem Video siehst du, wie ein neuer Stromkreis angelegt wird. Schritt für Schritt wird erklärt, wie die notwendigen Daten erfasst und gespeichert werden.",
+            title: "Stromkreis hinzufügen",
+            text: "Schritt für Schritt: einen neuen Stromkreis anlegen, die wichtigsten Angaben erfassen und speichern.",
             video: "m2.mp4"
           },
           {
-            title: "Messwerte Ausfüllen",
-            text: "Dieses Video zeigt, wie Messwerte korrekt eingetragen werden. Du erfährst, welche Werte erforderlich sind und wie VoltLog dich bei der Eingabe unterstützt.",
+            title: "Messwerte ausfüllen",
+            text: "So trägst du Messwerte strukturiert ein. Du lernst, wo Pflichtfelder sind und wie du Eingabefehler vermeidest.",
             video: "m3.mp4"
           },
           {
             title: "Übersicht Stromkreise",
-            text: "Hier erhältst du eine Übersicht aller angelegten Stromkreise. Das Video zeigt, wie du Stromkreise schnell findest, prüfst und bearbeitest.",
+            text: "Alle Stromkreise auf einen Blick: filtern, öffnen, prüfen und bearbeiten.",
             video: "m4.mp4"
-          },
-                    {
-            title: "App für Kontrolle vorberieten",
-            text: "In diesem Video wird erklärt, wie du die App für eine Kontrolle vorbereitest und die Mängelliste herunterlädst, um offline oder vor Ort effizient arbeiten zu können.",
+          }
+        ]
+      },
+      {
+        category: "Mobile App",
+        description: "Arbeiten unterwegs: Projekte, Stromkreise, Messwerte, Kontrollen und Berichte – direkt auf dem Smartphone.",
+        subtitle: "Kontrollen & Berichte",
+        items: [
+          {
+            title: "App für Kontrolle vorbereiten",
+            text: "So bereitest du eine Kontrolle vor und lädst benötigte Daten (z. B. Mängellisten) herunter, damit du vor Ort effizient arbeiten kannst.",
             video: "m5.mp4"
           },
-                    {
-            title: "Mängel erfassenn",
-            text: "Hier lernst du, wie Mängel direkt in der App erfasst werden. Das Video zeigt das Anlegen, Beschreiben und Dokumentieren von Mängeln inklusive Fotos und Kommentaren.",
+          {
+            title: "Mängel erfassen",
+            text: "Mängel direkt in der App erfassen: anlegen, beschreiben und dokumentieren (z. B. mit Fotos/Notizen – je nach Setup).",
             video: "m6.mp4"
           },
-                    {
-            title: "Protokoll erfassenn",
-            text: "Dieses Video erklärt, wie Prüf- und Messprotokolle erstellt werden. Alle relevanten Daten werden strukturiert erfasst und automatisch im Projekt gespeichert.",
+          {
+            title: "Protokoll erfassen",
+            text: "Prüf- und Messprotokolle erstellen: alle relevanten Daten strukturiert erfassen und im Projekt ablegen.",
             video: "m7.mp4"
           },
-                    {
+          {
             title: "Übersicht Bericht",
-            text: "In diesem Video siehst du, wie Berichte aufgebaut sind und überprüft werden können. Du erhältst einen Überblick über Inhalte, Status und Exportmöglichkeiten.",
+            text: "Wie Berichte aufgebaut sind, welche Status es gibt und wie du Inhalte vor dem Export prüfst.",
             video: "m8.mp4"
           },
-                    {
+          {
             title: "Übersicht Projekt",
-            text: "Hier wird die Projektübersicht erklärt. Du erkennst auf einen Blick den Fortschritt, offene Punkte und den aktuellen Stand deines Projekts.",
+            text: "Projektübersicht verstehen: Fortschritt, offene Punkte und aktueller Stand auf einen Blick.",
             video: "m9.mp4"
           },
-                    {
+          {
             title: "Übersicht Einstellungen",
-            text: "Dieses Video zeigt die Einstellungen der App. Du lernst, wie Benutzeroptionen, Projekteinstellungen und allgemeine Konfigurationen angepasst werden.",
+            text: "Einstellungen in der App: Benutzeroptionen, Projekt-/Mandanteneinstellungen und allgemeine Konfiguration.",
             video: "m10.mp4"
           },
-                    {
-            title: "AI Funktion",
-            text: "In diesem Video wird die AI-Funktion vorgestellt. Sie unterstützt dich bei der Analyse, Texterstellung und Auswertung von Daten, um Zeit zu sparen und Fehler zu reduzieren.",
+          {
+            title: "AI‑Funktion",
+            text: "Die AI‑Funktion unterstützt bei Analyse, Textvorschlägen und Auswertung – damit du schneller dokumentierst und weniger nacharbeiten musst.",
             video: "m11.mp4"
           }
         ]
       },
       {
         category: "Web App",
-        description: "Alles rund um die Web App",
-        subtitle: "VHosts & DocumentRoot",
+        description: "Arbeiten im Browser: Übersicht, Verwaltung, Auswertungen und Exporte.",
+        subtitle: "Übersichten & Verwaltung",
         items: [
           {
-            title: "Messwerte Übersicht",
-            text: "",
+            title: "Projekt‑Übersicht",
+            text: "Alle Projekte zentral verwalten: suchen, filtern, öffnen und den aktuellen Status prüfen.",
+            video: "w7.mp4"
+          },
+          {
+            title: "Account‑Übersicht",
+            text: "Kontodaten, Einstellungen und (je nach Rolle) Abos/Organisation – alles an einem Ort.",
+            video: "w8.mp4"
+          },
+          {
+            title: "Messwerte‑Übersicht",
+            text: "Messwerte im Überblick: prüfen, nachverfolgen und für Berichte vorbereiten.",
             video: "w1.mp4"
           },
           {
-            title: "Kontrolle Übersicht",
-            text: "",
+            title: "Kontrolle‑Übersicht",
+            text: "Kontrollen planen/überwachen, Status sehen und Details öffnen.",
             video: "w2.mp4"
           },
-                    {
-            title: "Gruppen Übersicht",
-            text: "",
+          {
+            title: "Kontrollbericht exportieren",
+            text: "So exportierst du einen Kontrollbericht und stellst sicher, dass alle Angaben vollständig sind.",
+            video: "w9.mp4"
+          },
+          {
+            title: "Gruppen‑Übersicht",
+            text: "Gruppen/Teams verwalten, um Projekte und Zugriffe sauber zu organisieren.",
             video: "w3.mp4"
           },
           {
-            title: "Nutzer Übersicht",
-            text: "",
+            title: "Nutzer‑Übersicht",
+            text: "Benutzer verwalten: Rollen, Zugriffe und Einladungen (je nach Berechtigung).",
             video: "w4.mp4"
-          },
+          }
+        ]
+      },
+      {
+        category: "Web App",
+        description: "Arbeiten im Browser: Übersicht, Verwaltung, Auswertungen und Exporte.",
+        subtitle: "Vorlagen & Listen",
+        items: [
           {
             title: "Mängelliste erstellen",
-            text: "",
+            text: "Mängellisten anlegen und strukturieren, damit die Erfassung vor Ort schnell und konsistent bleibt.",
             video: "w5.mp4"
-          },
+          }
         ]
       },
       {
-        category: "Export Dokumente",
-        description: "TLS, Headers und Best Practices.",
-        subtitle: "SSL & HTTPS",
+        category: "Dokumente & Export",
+        description: "Messprotokolle und Kontrollberichte als Dokumente ausgeben.",
+        subtitle: "Exports",
         items: [
           {
-            title: "Export Dokumente",
-            text: "",
+            title: "Messprotokolle",
+            text: "Messprotokolle erstellen und exportieren – ideal für Ablage, Übergabe und Nachweisführung.",
             video: "w6.mp4"
           },
+          {
+            title: "Kontrollbericht",
+            text: "Kontrollbericht generieren, prüfen und exportieren (z. B. als PDF – je nach Konfiguration).",
+            video: "w10.mp4"
+          }
         ]
       },
       {
-        category: "VoltLog Funktion",
-        description: "Caching, Kompression und Module.",
-        subtitle: "Caching & Kompression",
+        category: "Einstellungen & Daten",
+        description: "Häufige Fragen zu Zugriffen, Datenhaltung und dem täglichen Arbeiten.",
+        subtitle: "Allgemein",
         items: [
           {
-            title: "Gzip/Brotli Kompression aktivieren",
-            text: "Aktiviere mod_deflate oder mod_brotli. Komprimiere Textressourcen (HTML/CSS/JS) und teste die Response-Header. Nicht alles komprimieren (z. B. Videos).",
-            video: "/videos/apache-compression.mp4"
+            title: "Rollen & Zugriffsrechte",
+            text: "Wer was sehen und bearbeiten darf, wird über Rollen/Berechtigungen gesteuert. Nutze klare Rollen (z. B. Admin, Projektleitung, Prüfer) und halte den Zugriff so klein wie nötig.",
+            video: ""
           },
           {
-            title: "Caching mit mod_expires",
-            text: "Setze Expires und Cache-Control für statische Assets. Versioniere Assets (z. B. app.v123.js) für aggressives Caching ohne Probleme.",
-            video: "/videos/apache-caching.mp4"
+            title: "Synchronisation & Offline‑Arbeiten",
+            text: "Wenn du offline arbeitest, erfasse Daten wie gewohnt und synchronisiere später, sobald wieder eine Verbindung besteht. Achte darauf, vor Ort benötigte Projektdaten vorher zu laden.",
+            video: ""
+          },
+          {
+            title: "Datenexport & Archivierung",
+            text: "Für die Ablage empfiehlt sich ein regelmäßiger Export der relevanten Berichte/Protokolle. Lege eine Ordnerstruktur pro Kunde/Projekt/Datum fest, damit du später schnell findest, was du brauchst.",
+            video: ""
           }
         ]
       }
@@ -1170,11 +1215,9 @@
   </script>
 
   <!--
-    ✅ Apache2 Deployment (kurz):
-    1) Datei als "index.html" speichern
-    2) Auf deinen Apache DocumentRoot kopieren, z.B. /var/www/html/
-    3) Videos in /var/www/html/videos/ ablegen (Pfad passt zu /videos/...)
-    4) Aufrufen: http://dein-server/
-  -->
+  Deployment-Hinweis:
+  - Datei als "index.html" speichern
+  - Auf deinen Webserver hochladen (inkl. Video-Dateien im gleichen Ordner oder passenden Pfaden)
+-->
 </body>
 </html>
