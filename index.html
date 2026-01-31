@@ -575,182 +575,208 @@
      *
      * Du kannst das hier 1:1 durch dein JSON ersetzen (aus Datei, PHP, API …).
      */
-    const FAQ_DATA = [
+const FAQ_DATA = [
+  {
+    category: "Mobile App",
+    description: "Arbeiten unterwegs: Projekte, Stromkreise, Messungen, Kontrollen und Berichte direkt auf dem Smartphone.",
+    subtitle: "Erste Schritte",
+    items: [
       {
-        category: "Mobile App",
-        description: "Arbeiten unterwegs: Projekte, Stromkreise, Messwerte, Kontrollen und Berichte – direkt auf dem Smartphone.",
-        subtitle: "Erste Schritte",
-        items: [
-          {
-            title: "Anmeldung & Registrierung",
-            text: "So erstellst du dein VoltLog-Konto oder meldest dich an. Du siehst, welche Angaben nötig sind und wie du sicher startest.",
-            video: "m0.mp4"
-          },
-          {
-            title: "VoltLog – Grundprinzip (Smartphone)",
-            text: "Ein kurzer Überblick über die mobile Arbeitsweise: Projekte öffnen, Daten erfassen, Ergebnisse prüfen und alles sauber dokumentieren.",
-            video: "m1.mp4"
-          }
-        ]
+        title: "Anmeldung & Registrierung",
+        text: "Erstelle dein VoltLog-Konto oder melde dich an. Du erfährst, welche Angaben erforderlich sind und wie du sicher loslegst.",
+        video: "m0.mp4"
       },
       {
-        category: "Mobile App",
-        description: "Arbeiten unterwegs: Projekte, Stromkreise, Messwerte, Kontrollen und Berichte – direkt auf dem Smartphone.",
-        subtitle: "Stromkreise & Messwerte",
-        items: [
-          {
-            title: "Stromkreis hinzufügen",
-            text: "Schritt für Schritt: einen neuen Stromkreis anlegen, die wichtigsten Angaben erfassen und speichern.",
-            video: "m2.mp4"
-          },
-          {
-            title: "Messwerte ausfüllen",
-            text: "So trägst du Messwerte strukturiert ein. Du lernst, wo Pflichtfelder sind und wie du Eingabefehler vermeidest.",
-            video: "m3.mp4"
-          },
-          {
-            title: "Übersicht Stromkreise",
-            text: "Alle Stromkreise auf einen Blick: filtern, öffnen, prüfen und bearbeiten.",
-            video: "m4.mp4"
-          }
-        ]
-      },
-      {
-        category: "Mobile App",
-        description: "Arbeiten unterwegs: Projekte, Stromkreise, Messwerte, Kontrollen und Berichte – direkt auf dem Smartphone.",
-        subtitle: "Kontrollen & Berichte",
-        items: [
-          {
-            title: "App für Kontrolle vorbereiten",
-            text: "So bereitest du eine Kontrolle vor und lädst benötigte Daten (z. B. Mängellisten) herunter, damit du vor Ort effizient arbeiten kannst.",
-            video: "m5.mp4"
-          },
-          {
-            title: "Mängel erfassen",
-            text: "Mängel direkt in der App erfassen: anlegen, beschreiben und dokumentieren (z. B. mit Fotos/Notizen – je nach Setup).",
-            video: "m6.mp4"
-          },
-          {
-            title: "Protokoll erfassen",
-            text: "Prüf- und Messprotokolle erstellen: alle relevanten Daten strukturiert erfassen und im Projekt ablegen.",
-            video: "m7.mp4"
-          },
-          {
-            title: "Übersicht Bericht",
-            text: "Wie Berichte aufgebaut sind, welche Status es gibt und wie du Inhalte vor dem Export prüfst.",
-            video: "m8.mp4"
-          },
-          {
-            title: "Übersicht Projekt",
-            text: "Projektübersicht verstehen: Fortschritt, offene Punkte und aktueller Stand auf einen Blick.",
-            video: "m9.mp4"
-          },
-          {
-            title: "Übersicht Einstellungen",
-            text: "Einstellungen in der App: Benutzeroptionen, Projekt-/Mandanteneinstellungen und allgemeine Konfiguration.",
-            video: "m10.mp4"
-          },
-          {
-            title: "AI‑Funktion",
-            text: "Die AI‑Funktion unterstützt bei Analyse, Textvorschlägen und Auswertung – damit du schneller dokumentierst und weniger nacharbeiten musst.",
-            video: "m11.mp4"
-          }
-        ]
-      },
-      {
-        category: "Web App",
-        description: "Arbeiten im Browser: Übersicht, Verwaltung, Auswertungen und Exporte.",
-        subtitle: "Übersichten & Verwaltung",
-        items: [
-          {
-            title: "Projekt‑Übersicht",
-            text: "Alle Projekte zentral verwalten: suchen, filtern, öffnen und den aktuellen Status prüfen.",
-            video: "w7.mp4"
-          },
-          {
-            title: "Account‑Übersicht",
-            text: "Kontodaten, Einstellungen und (je nach Rolle) Abos/Organisation – alles an einem Ort.",
-            video: "w8.mp4"
-          },
-          {
-            title: "Messwerte‑Übersicht",
-            text: "Messwerte im Überblick: prüfen, nachverfolgen und für Berichte vorbereiten.",
-            video: "w1.mp4"
-          },
-          {
-            title: "Kontrolle‑Übersicht",
-            text: "Kontrollen planen/überwachen, Status sehen und Details öffnen.",
-            video: "w2.mp4"
-          },
-          {
-            title: "Kontrollbericht exportieren",
-            text: "So exportierst du einen Kontrollbericht und stellst sicher, dass alle Angaben vollständig sind.",
-            video: "w9.mp4"
-          },
-          {
-            title: "Gruppen‑Übersicht",
-            text: "Gruppen/Teams verwalten, um Projekte und Zugriffe sauber zu organisieren.",
-            video: "w3.mp4"
-          },
-          {
-            title: "Nutzer‑Übersicht",
-            text: "Benutzer verwalten: Rollen, Zugriffe und Einladungen (je nach Berechtigung).",
-            video: "w4.mp4"
-          }
-        ]
-      },
-      {
-        category: "Web App",
-        description: "Arbeiten im Browser: Übersicht, Verwaltung, Auswertungen und Exporte.",
-        subtitle: "Vorlagen & Listen",
-        items: [
-          {
-            title: "Mängelliste erstellen",
-            text: "Mängellisten anlegen und strukturieren, damit die Erfassung vor Ort schnell und konsistent bleibt.",
-            video: "w5.mp4"
-          }
-        ]
-      },
-      {
-        category: "Dokumente & Export",
-        description: "Messprotokolle und Kontrollberichte als Dokumente ausgeben.",
-        subtitle: "Exports",
-        items: [
-          {
-            title: "Messprotokolle",
-            text: "Messprotokolle erstellen und exportieren – ideal für Ablage, Übergabe und Nachweisführung.",
-            video: "w6.mp4"
-          },
-          {
-            title: "Kontrollbericht",
-            text: "Kontrollbericht generieren, prüfen und exportieren (z. B. als PDF – je nach Konfiguration).",
-            video: "w10.mp4"
-          }
-        ]
-      },
-      {
-        category: "Einstellungen & Daten",
-        description: "Häufige Fragen zu Zugriffen, Datenhaltung und dem täglichen Arbeiten.",
-        subtitle: "Allgemein",
-        items: [
-          {
-            title: "Rollen & Zugriffsrechte",
-            text: "Wer was sehen und bearbeiten darf, wird über Rollen/Berechtigungen gesteuert. Nutze klare Rollen (z. B. Admin, Projektleitung, Prüfer) und halte den Zugriff so klein wie nötig.",
-            video: ""
-          },
-          {
-            title: "Synchronisation & Offline‑Arbeiten",
-            text: "Wenn du offline arbeitest, erfasse Daten wie gewohnt und synchronisiere später, sobald wieder eine Verbindung besteht. Achte darauf, vor Ort benötigte Projektdaten vorher zu laden.",
-            video: ""
-          },
-          {
-            title: "Datenexport & Archivierung",
-            text: "Für die Ablage empfiehlt sich ein regelmäßiger Export der relevanten Berichte/Protokolle. Lege eine Ordnerstruktur pro Kunde/Projekt/Datum fest, damit du später schnell findest, was du brauchst.",
-            video: ""
-          }
-        ]
+        title: "VoltLog – Grundprinzip (Smartphone)",
+        text: "Ein kompakter Überblick über die mobile Arbeitsweise: Projekte öffnen, Daten erfassen, Ergebnisse prüfen und alles sauber dokumentieren.",
+        video: "m1.mp4"
       }
-    ];
+    ]
+  },
+  {
+    category: "Mobile App",
+    description: "Arbeiten unterwegs: Projekte, Stromkreise, Messungen, Kontrollen und Berichte direkt auf dem Smartphone.",
+    subtitle: "Stromkreise & Messwerte",
+    items: [
+      {
+        title: "Stromkreis hinzufügen",
+        text: "So legst du einen neuen Stromkreis an, trägst die wichtigsten Informationen ein und speicherst ihn korrekt ab.",
+        video: "m2.mp4"
+      },
+      {
+        title: "Messwerte erfassen",
+        text: "Messwerte strukturiert eingeben: Du siehst, welche Felder Pflicht sind und wie du Eingabefehler vermeidest.",
+        video: "m3.mp4"
+      },
+      {
+        title: "Stromkreis-Übersicht",
+        text: "Alle Stromkreise im Überblick: filtern, öffnen, prüfen und bei Bedarf bearbeiten.",
+        video: "m4.mp4"
+      }
+    ]
+  },
+  {
+    category: "Mobile App",
+    description: "Arbeiten unterwegs: Projekte, Stromkreise, Messungen, Kontrollen und Berichte direkt auf dem Smartphone.",
+    subtitle: "Kontrollen & Berichte",
+    items: [
+      {
+        title: "Kontrolle vorbereiten",
+        text: "Bereite eine Kontrolle vor und lade alle benötigten Daten wie Mängellisten, damit du vor Ort effizient arbeiten kannst.",
+        video: "m5.mp4"
+      },
+      {
+        title: "Mängel erfassen",
+        text: "Mängel direkt in der App anlegen, beschreiben und dokumentieren – inklusive Fotos oder Notizen (je nach Konfiguration).",
+        video: "m6.mp4"
+      },
+      {
+        title: "Protokolle erfassen",
+        text: "Prüf- und Messprotokolle erstellen, alle relevanten Daten erfassen und dem Projekt zuordnen.",
+        video: "m7.mp4"
+      },
+      {
+        title: "Berichtsübersicht",
+        text: "Aufbau, Status und Inhalte von Berichten verstehen und vor dem Export prüfen.",
+        video: "m8.mp4"
+      },
+      {
+        title: "Projektübersicht",
+        text: "Projektfortschritt, offene Punkte und aktuellen Stand auf einen Blick sehen.",
+        video: "m9.mp4"
+      },
+      {
+        title: "Einstellungen",
+        text: "Benutzer-, Projekt- und Mandanteneinstellungen sowie die allgemeine App-Konfiguration verwalten.",
+        video: "m10.mp4"
+      },
+      {
+        title: "AI-Funktion",
+        text: "Die KI unterstützt dich bei Analyse, Textvorschlägen und Auswertungen, damit du schneller dokumentierst und weniger nacharbeiten musst.",
+        video: "m11.mp4"
+      }
+    ]
+  },
+  {
+    category: "Web App",
+    description: "Arbeiten im Browser: Verwaltung, Auswertungen, Übersichten und Exporte.",
+    subtitle: "Übersichten & Verwaltung",
+    items: [
+      {
+        title: "Projektübersicht",
+        text: "Alle Projekte zentral verwalten, durchsuchen, filtern und den aktuellen Status einsehen.",
+        video: "w7.mp4"
+      },
+      {
+        title: "Accountübersicht",
+        text: "Kontodaten, Einstellungen sowie – je nach Rolle – Abos und Organisationen verwalten.",
+        video: "w8.mp4"
+      },
+      {
+        title: "Was sind Gruppen?",
+        text: "Gruppen sind Verteilstromkreise. Sie helfen dabei, Stromkreise logisch zu strukturieren und übersichtlich zu organisieren.",
+        video: "w15.mp4"
+      },
+      {
+        title: "Messwerte-Übersicht",
+        text: "Alle Messwerte prüfen, nachverfolgen und für Berichte vorbereiten.",
+        video: "w1.mp4"
+      },
+      {
+        title: "Messwerte erstellen",
+        text: "Neue Messwerte erfassen und korrekt speichern.",
+        video: "w12.mp4"
+      },
+      {
+        title: "Erstprüfungen exportieren",
+        text: "Ein Erstprüfungsprotokoll exportieren und sicherstellen, dass alle Angaben vollständig sind.",
+        video: "w14.mp4"
+      },
+      {
+        title: "Kontrollübersicht",
+        text: "Kontrollen planen, überwachen und Details einsehen.",
+        video: "w2.mp4"
+      },
+      {
+        title: "Kontrollbericht exportieren",
+        text: "Kontrollberichte erzeugen, prüfen und exportieren.",
+        video: "w9.mp4"
+      },
+      {
+        title: "Weitere Exportfunktionen",
+        text: "Zusätzliche Exportmöglichkeiten für Berichte und Daten nutzen.",
+        video: "w13.mp4"
+      },
+      {
+        title: "Gruppenübersicht",
+        text: "Teams und Gruppen verwalten, um Projekte und Zugriffe klar zu organisieren.",
+        video: "w3.mp4"
+      },
+      {
+        title: "Benutzerübersicht",
+        text: "Benutzer verwalten, Rollen zuweisen und Einladungen verschicken.",
+        video: "w4.mp4"
+      }
+    ]
+  },
+  {
+    category: "Web App",
+    description: "Arbeiten im Browser: Verwaltung, Auswertungen, Übersichten und Exporte.",
+    subtitle: "Vorlagen & Listen",
+    items: [
+      {
+        title: "Mängellisten erstellen",
+        text: "Mängellisten anlegen und strukturieren, damit die Erfassung vor Ort schnell und einheitlich erfolgt.",
+        video: "w5.mp4"
+      }
+    ]
+  },
+  {
+    category: "Dokumente & Export",
+    description: "Mess- und Kontrollberichte als offizielle Dokumente ausgeben.",
+    subtitle: "Exports",
+    items: [
+      {
+        title: "Dokumenten-Validierung",
+        text: "Dokumente vor der Ausstellung auf Vollständigkeit und Richtigkeit prüfen.",
+        video: "w11.mp4"
+      },
+      {
+        title: "Messprotokolle",
+        text: "Messprotokolle erstellen und exportieren – ideal für Ablage, Übergabe und Nachweisführung.",
+        video: "w6.mp4"
+      },
+      {
+        title: "Kontrollberichte",
+        text: "Kontrollberichte generieren, prüfen und als PDF oder in anderen Formaten exportieren.",
+        video: "w10.mp4"
+      }
+    ]
+  },
+  {
+    category: "Einstellungen & Daten",
+    description: "Wichtige Grundlagen für den täglichen Einsatz von VoltLog.",
+    subtitle: "Allgemein",
+    items: [
+      {
+        title: "Rollen & Zugriffsrechte",
+        text: "Lege fest, wer was sehen und bearbeiten darf, z. B. Administrator, Projektleitung oder Prüfer.",
+        video: ""
+      },
+      {
+        title: "Synchronisation & Offline-Arbeiten",
+        text: "Du kannst auch ohne Internet arbeiten. Die Daten werden automatisch synchronisiert, sobald wieder eine Verbindung besteht.",
+        video: ""
+      },
+      {
+        title: "Datenexport & Archivierung",
+        text: "Exportiere regelmäßig Berichte und Protokolle und lege sie strukturiert nach Kunde, Projekt und Datum ab.",
+        video: ""
+      }
+    ]
+  }
+];
+
 
     // ---------- Helpers ----------
     const $ = (sel, root=document) => root.querySelector(sel);
